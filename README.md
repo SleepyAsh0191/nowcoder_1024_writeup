@@ -60,85 +60,9 @@ A000290 指的是完全平方，详细可看OEIS。
 
 # G. 昨日重现
 
-$$
-\begin{bmatrix}
-F_{n+1} & F_{n} \\
-F_{n} & F_{n-1}
-\end{bmatrix}
-= 
-\begin{bmatrix}
-1 & 1 \\
-1 & 0
-\end{bmatrix}^n
-=
-\underbrace{
-\begin{bmatrix}
-
-
-1 & 1 \\
-1 & 0
-\end{bmatrix}
-\cdots
-\begin{bmatrix}
-1 & 1 \\
-1 & 0
-\end{bmatrix}
-}_{n \text{ times}}.
-$$
-
-这是斐波那契数列用矩阵表示的递推关系，算矩阵乘法与快速幂即可，记得处理n=0与n=1的情况，时间复杂度O(log n)
-
-代码参考(python)
-```python
-def matrix_mult(A, B, mod):
-    return [
-        [
-            (A[0][0] * B[0][0] + A[0][1] * B[1][0]) % mod,
-            (A[0][0] * B[0][1] + A[0][1] * B[1][1]) % mod
-        ],
-        [
-            (A[1][0] * B[0][0] + A[1][1] * B[1][0]) % mod,
-            (A[1][0] * B[0][1] + A[1][1] * B[1][1]) % mod
-        ]
-    ]
-
-def matrix_pow(mat, exp, mod):
-    res = [[1, 0], [0, 1]]
-    base = mat
-    
-    while exp > 0:
-        if exp % 2 == 1:
-            res = matrix_mult(res, base, mod)
-        base = matrix_mult(base, base, mod)
-        exp //= 2
-        
-    return res
-
-def fibonacci(n, mod):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    
-    F = [[1, 1], [1, 0]]
-    result = matrix_pow(F, n - 1, mod)
-    return result[0][0]
-
-inputs = []
-while True:
-    n = int(input().strip())
-    if n == -1:
-        break
-    inputs.append(n)
-
-mod = 10**3
-
-for n in inputs:
-    print(fibonacci(n, mod))
-```
+我是傻逼
 
 # H. 小苯的括号计数
-
 
 没写完呢，别急
 
